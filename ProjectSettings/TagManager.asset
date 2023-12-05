@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - Resource
+  - Building
   - 
   - 
   - 
@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 418398987
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tree
+    uniqueID: 501754539
+    locked: 0
+  - name: TreeBush
+    uniqueID: 2602003347
+    locked: 0
+  - name: Top
+    uniqueID: 2923047329
     locked: 0

@@ -66,6 +66,10 @@ public class ResourceGenerator : MonoBehaviour
     }
     public float GetAmountGeneratorPerSecond()
     {
-        return 1f / timeMax;
+        if (enabled)
+        {
+            return 1f / timeMax;
+        }
+        return 0;
     }
 }

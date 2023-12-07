@@ -1,3 +1,4 @@
+using LTA.DesignPattern;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -90,3 +91,4 @@ public class EnemyWaveManager : MonoBehaviour
         return spawnPosition;
     }
 }
+public class EnemyWaveInstance: SingletonMonoBehaviour<EnemyWaveManager> { }

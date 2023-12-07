@@ -11,7 +11,7 @@ public class BuildingManager : MonoBehaviour
     private BuildingTypeListSO buildingTypeList;
     public BuildingTypeSO activeBuildingType;
     public event EventHandler<OnActiveBuildingTypeChangeEventArgs> OnActiveBuildingTypeChange;
-    //[SerializeField]private Building hqBuilding;
+    [SerializeField]private Building hqBuilding;
 
     public class OnActiveBuildingTypeChangeEventArgs: EventArgs
     {
@@ -20,7 +20,14 @@ public class BuildingManager : MonoBehaviour
     private void Awake()
     {
         buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+        hqBuilding.GetComponent<HealthSystem>().OnDied += HQ_OnDied;
     }
+
+    private void HQ_OnDied(object sender, EventArgs e)
+    {
+        GameOverUI.Instance.Show();
+    }
+
     void Update()
     {
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
@@ -45,11 +52,6 @@ public class BuildingManager : MonoBehaviour
                     TooltipUI.Instance.Show(errMessage, new TooltipUI.TooltipTimer { timer = 2f });
                 }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Vector3 enemySpawn = UtilsClass.GetMousePosition() + UtilsClass.GetRandomDir();
-            EnemyController.CreateEnemy(enemySpawn);
         }
     }
 

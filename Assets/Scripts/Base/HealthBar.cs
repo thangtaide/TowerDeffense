@@ -12,12 +12,13 @@ public class HealthBar : MonoBehaviour
     }
     private void Start()
     {
-        healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+        healthSystem.OnTakeDamage += HealthSystem_OnChangeHealth;
+        healthSystem.OnHeal += HealthSystem_OnChangeHealth;
         UpdateBar();
         UpdateHealthBarVisible();
     }
 
-    private void HealthSystem_OnTakeDamage(object sender, System.EventArgs e)
+    private void HealthSystem_OnChangeHealth(object sender, System.EventArgs e)
     {
         UpdateBar();
         UpdateHealthBarVisible() ;

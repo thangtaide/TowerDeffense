@@ -74,6 +74,7 @@ public class EnemyWaveManager : MonoBehaviour
         state = State.SpawningWave;
         waveNumber++;
         OnWaveNumberChange?.Invoke(this, EventArgs.Empty);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyWaveStarting);
     }
     
     public int GetWaveNumber()

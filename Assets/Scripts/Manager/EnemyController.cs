@@ -28,10 +28,17 @@ public class EnemyController : MonoBehaviour
         lookForTargetTimer = Random.Range(0f,lookForTargetTimerMax);
         healthSystem = GetComponent<HealthSystem>();
         healthSystem.OnDied += HealthSystem_OnDied;
+        healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+    }
+
+    private void HealthSystem_OnTakeDamage(object sender, System.EventArgs e)
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyHit);
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
         Destroy(gameObject);
     }
 

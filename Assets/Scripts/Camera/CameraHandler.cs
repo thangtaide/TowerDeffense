@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.EventSystems;
 using LTA.DesignPattern;
+using System;
 
 public class CameraHandler : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cinemachine;
     [SerializeField] float minOrthographicSize = 10f;
     [SerializeField] float maxOrthographicSize = 20f;
+    [Range(0, 1f)]
+    [SerializeField] float scrollingSizeMultil = .7f;
 
     Vector3 beginPosition, dragPosition, originPosition;
     float orthographicSize;
@@ -35,7 +38,28 @@ public class CameraHandler : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        Vector3 moveDir = new Vector3(x, y).normalized;
+
+        Vector3 scrollingSizeMoveLeftDown = new Vector3(Screen.width / 2 * (1 - scrollingSizeMultil), Screen.height / 2 * (1 - scrollingSizeMultil));
+        Vector3 scrollingSizeMoveRightUp = new Vector3(Screen.width-scrollingSizeMoveLeftDown.x, Screen.height-scrollingSizeMoveLeftDown.y);
+
+        float tempX = Input.mousePosition.x;
+        if (tempX > scrollingSizeMoveRightUp.x)
+        {
+            x = (tempX-scrollingSizeMoveRightUp.x) / scrollingSizeMoveLeftDown.x;
+        }else if(tempX < scrollingSizeMoveLeftDown.x)
+        {
+            x = (tempX - scrollingSizeMoveLeftDown.x) / scrollingSizeMoveLeftDown.x;
+        }
+        float tempY = Input.mousePosition.y;
+        if (tempY > scrollingSizeMoveRightUp.y)
+        {
+            y = (tempY - scrollingSizeMoveRightUp.y) / scrollingSizeMoveLeftDown.y;
+        }else if (tempY < scrollingSizeMoveLeftDown.y)
+        {
+            y = (tempY - scrollingSizeMoveLeftDown.y) / scrollingSizeMoveLeftDown.y;
+        }
+
+        Vector3 moveDir = new Vector3(x, y);
 
         transform.position += moveDir * Time.deltaTime * moveSpeed;
     }

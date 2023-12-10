@@ -296,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMaxRadius: 20
   lookForTargetTimerMax: 0.2
-  shootTimerMax: 0.3
+  shootTimerMax: 0.2
 --- !u!1001 &4471750863765094916
 PrefabInstance:
   m_ObjectHideFlags: 0

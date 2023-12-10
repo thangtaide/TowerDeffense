@@ -39,6 +39,7 @@ public class EnemyController : MonoBehaviour
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
+        Instantiate(Resources.Load<Transform>("pfEnemyDieParticles"),transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -90,7 +91,7 @@ public class EnemyController : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(10);
-                Destroy(gameObject);
+                this.healthSystem.TakeDamage(999);
             }
         }
     }

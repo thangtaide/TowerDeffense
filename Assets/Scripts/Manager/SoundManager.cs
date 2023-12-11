@@ -34,6 +34,9 @@ public class SoundManager : MonoBehaviour
         {
             soundAudioClipDictionary[sound] = Resources.Load<AudioClip>(sound.ToString());
         }
+
+        soundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.5f);
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
     }
     private void Start()
     {
@@ -56,11 +59,13 @@ public class SoundManager : MonoBehaviour
     {
         soundVolume += .1f;
         soundVolume = Mathf.Clamp01(soundVolume);
+        PlayerPrefs.SetFloat("SoundVolume", soundVolume);
     }
     public void DecreaseSoundVolume()
     {
         soundVolume -= .1f;
         soundVolume = Mathf.Clamp01(soundVolume);
+        PlayerPrefs.SetFloat("SoundVolume", soundVolume);
     }
 
     public float GetSoundVolume()
@@ -73,12 +78,14 @@ public class SoundManager : MonoBehaviour
         musicVolume += .1f;
         musicVolume = Mathf.Clamp01(musicVolume);
         audioSource.volume = musicVolume;
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
     }
     public void DecreaseMusicVolume()
     {
         musicVolume -= .1f;
         musicVolume = Mathf.Clamp01(musicVolume);
         audioSource.volume = musicVolume;
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
     }
 
     public float GetMusicVolume()

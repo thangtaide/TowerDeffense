@@ -28,7 +28,6 @@ public class HealthBar : MonoBehaviour
         healthSystem.OnHealthAmountMaxChanged += HealthSystem_OnHealthAmountMaxChanged;
         UpdateBar();
         UpdateHealthBarVisible();
-        gameObject.SetActive(true);
     }
 
     private void HealthSystem_OnHealthAmountMaxChanged(object sender, System.EventArgs e)

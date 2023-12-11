@@ -37,6 +37,7 @@ public class SoundManager : MonoBehaviour
 
         soundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.5f);
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        audioSource.volume = musicVolume;
     }
     private void Start()
     {

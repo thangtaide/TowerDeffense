@@ -48,8 +48,7 @@ public class Building : MonoBehaviour
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDestroyed);
-        Instantiate(Resources.Load<Transform>("pfBuildingDestroyedParticles"), transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        DestroyBuilding();
     }
 
     private void OnMouseEnter()
@@ -91,5 +90,11 @@ public class Building : MonoBehaviour
         {
             buildingRepairBtn.gameObject.SetActive(false);
         }
+    }
+
+    public void DestroyBuilding()
+    {
+        Instantiate(Resources.Load<Transform>("pfBuildingDestroyedParticles"), transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

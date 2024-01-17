@@ -25,7 +25,7 @@ public class BuildingRepairBtn : MonoBehaviour
 
                 if(ResourceManagerInstance.Instance.CanAfford(resourceAmountRepairCost))
                 {
-                    healthSystem.HealFull(holder.buildingType.constructionTimerMax);
+                    healthSystem.HealFull(holder.buildingType.buildingInfos[0].constructionTimerMax);
                     ResourceManagerInstance.Instance.SpendResource(resourceAmountRepairCost);
                 }
                 else

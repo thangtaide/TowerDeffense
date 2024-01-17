@@ -37,16 +37,16 @@ public class BuildingManager : MonoBehaviour
             {
                 if (CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition(),out string errMessage))
                 {
-                    if (ResourceManagerInstance.Instance.CanAfford(activeBuildingType.resourceCostArray))
+                    if (ResourceManagerInstance.Instance.CanAfford(activeBuildingType.buildingInfos[0].resourceCostArray))
                     {
                         //Instantiate(activeBuildingType.prefab, UtilsClass.GetMousePosition(), Quaternion.identity);
                         BuildingConstruction.Create(UtilsClass.GetMousePosition(),activeBuildingType);
                         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingPlaced);
-                        ResourceManagerInstance.Instance.SpendResource(activeBuildingType.resourceCostArray);
+                        ResourceManagerInstance.Instance.SpendResource(activeBuildingType.buildingInfos[0].resourceCostArray);
                     }
                     else
                     {
-                        TooltipUI.Instance.Show("Cannot afford \n"+activeBuildingType.GetResourceAmountString(), new TooltipUI.TooltipTimer { timer = 2f});
+                        TooltipUI.Instance.Show("Cannot afford \n"+activeBuildingType.GetResourceAmountString(1), new TooltipUI.TooltipTimer { timer = 2f});
                     }
                 }
                 else
@@ -89,6 +89,16 @@ public class BuildingManager : MonoBehaviour
                     errMessage = "Too close to another building of same type!";
                     return false;
                 }
+            }
+        }
+
+        if (buildingType.hasResourceGenerator)
+        {
+            ResourceGeneratorData resourceGeneratorData = buildingType.buildingInfos[0].resourceGeneratorData;
+            int nearByResourceAmount = ResourceGenerator.GetNearByResourceAmount(resourceGeneratorData, position);
+            if(nearByResourceAmount == 0) {
+                errMessage = "There are no nearby resource nodes!";
+                return false;
             }
         }
 

@@ -48,8 +48,8 @@ public class BuildingConstruction : MonoBehaviour
     {
         this.buildingType = buildingType;
 
-        sprite.sprite = buildingType.sprite;
-        constructionTimerMax = buildingType.constructionTimerMax;
+        sprite.sprite = buildingType.buildingInfos[0].sprite;
+        constructionTimerMax = buildingType.buildingInfos[0].constructionTimerMax;
         constructionTimer = constructionTimerMax;
         boxCollider.size = buildingType.prefab.GetComponent<BoxCollider2D>().size;
         boxCollider.offset = buildingType.prefab.GetComponent<BoxCollider2D>().offset;

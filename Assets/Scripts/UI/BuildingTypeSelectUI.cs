@@ -48,7 +48,7 @@ public class BuildingTypeSelectUI : MonoBehaviour
             if(ignorBuildingType.Contains(buildingType)) continue;
             Transform btnBuildingTransform = Instantiate(btnTemplate, transform);
             btnBuildingTransform.gameObject.SetActive(true);
-            btnBuildingTransform.Find("Image").GetComponent<Image>().sprite = buildingType.sprite;
+            btnBuildingTransform.Find("Image").GetComponent<Image>().sprite = buildingType.buildingInfos[0].sprite;
             btnBuildingTransform.GetComponent<RectTransform>().anchoredPosition = new Vector2(btnTemplatePos.x + index * distance, btnTemplatePos.y);
 
             btnBuildingTransform.GetComponent<Button>().onClick.AddListener(() => { 
@@ -58,7 +58,7 @@ public class BuildingTypeSelectUI : MonoBehaviour
             mouseEnterExitEvent = btnBuildingTransform.GetComponent<MouseEnterExitEvent>();
             mouseEnterExitEvent.OnMouseEnter += (object sender, EventArgs e) =>
             {
-                TooltipUI.Instance.Show(buildingType.nameString+"\n"+buildingType.GetResourceAmountString());
+                TooltipUI.Instance.Show(buildingType.nameString+"\n"+buildingType.GetResourceAmountString(1));
             };
             mouseEnterExitEvent.OnMouseExit += (object sender, EventArgs e) =>
             {

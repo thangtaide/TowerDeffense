@@ -22,7 +22,7 @@ public class Building : MonoBehaviour
         healthSystem.OnHeal += HealthSystem_OnHeal;
         healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
 
-        healthSystem.SetHealthAmountMax(buildingType.healthAmountMax, true);
+        healthSystem.SetHealthAmountMax(buildingType.buildingInfos[0].healthAmountMax, true);
 
         HideBuildingDemolishBtn();
         HideBuildingRepairBtn();
@@ -32,6 +32,7 @@ public class Building : MonoBehaviour
     {
         ShowBuildingRepairBtn();
         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDamaged);
+        ChromaticAberrationEffect.Instance.SetWeight(1f);
     }
 
     private void HealthSystem_OnHeal(object sender, System.EventArgs e)
@@ -48,6 +49,8 @@ public class Building : MonoBehaviour
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDestroyed);
+        CamerachineShake.Instance.SharkCamera(10f, .2f);
+        ChromaticAberrationEffect.Instance.SetWeight(1f);
         DestroyBuilding();
     }
 

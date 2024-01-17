@@ -29,7 +29,7 @@ public class ResourceGenerator : MonoBehaviour
     
     private void Awake()
     {
-        resourceGeneratorData = GetComponent<BuildingTypeHolder>().buildingType.resourceGeneratorData;
+        resourceGeneratorData = GetComponent<BuildingTypeHolder>().buildingType.buildingInfos[0].resourceGeneratorData;
         timeMax = resourceGeneratorData.timeMax;
         timer = 0;
     }

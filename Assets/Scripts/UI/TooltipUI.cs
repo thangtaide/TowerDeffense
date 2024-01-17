@@ -58,9 +58,9 @@ public class TooltipUI : MonoBehaviour
     }
     public void Show(string text, TooltipTimer tooltipTimer = null)
     {
-        HandleFollowMouse();
-            this.tooltipTimer = tooltipTimer;
+        this.tooltipTimer = tooltipTimer;
         SetText(text);
+        HandleFollowMouse();
         gameObject.SetActive(true);
     }
     public void Hide()

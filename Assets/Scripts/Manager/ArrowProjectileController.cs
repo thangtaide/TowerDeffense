@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LTA.DesignPattern;
+using Unity.VisualScripting;
 
 public class ArrowProjectileController : MonoBehaviour
 {
     [SerializeField] float timeToDie = 2f;
     [SerializeField] int damageAmount = 10;
     Vector3 moveDir;
-    public static ArrowProjectileController CreateArrow(Vector3 position, EnemyController enemy)
+    public static ArrowProjectileController CreateArrow(Vector3 position, EnemyController enemy, int dameAmount = 10)
     {
         Transform arrowPrefab = Resources.Load<Transform>("ArrowProjectile");
         Transform arrowTransform = Instantiate(arrowPrefab, position, Quaternion.identity);
         ArrowProjectileController arrowProjectile = arrowTransform.GetComponent<ArrowProjectileController>();
         arrowProjectile.SetTarget(enemy);
+        arrowProjectile.damageAmount = dameAmount;
         return arrowProjectile;
     }
 

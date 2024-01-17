@@ -23,10 +23,10 @@ public class BuildingGhost : MonoBehaviour
     {
         if (e.activeBuildingType != null)
         {
-            Show(e.activeBuildingType.sprite);
+            Show(e.activeBuildingType.buildingInfos[0].sprite);
             if (e.activeBuildingType.hasResourceGenerator)
             {
-                resourceGhostOverlay.Show(e.activeBuildingType.resourceGeneratorData);
+                resourceGhostOverlay.Show(e.activeBuildingType.buildingInfos[0].resourceGeneratorData);
             }
             else
             {
@@ -45,7 +45,7 @@ public class BuildingGhost : MonoBehaviour
         transform.position = UtilsClass.GetMousePosition();
         if (BuildingManagerInstance.Instance.activeBuildingType != null)
         {
-            bool canAfford = ResourceManagerInstance.Instance.CanAfford(BuildingManagerInstance.Instance.activeBuildingType.resourceCostArray);
+            bool canAfford = ResourceManagerInstance.Instance.CanAfford(BuildingManagerInstance.Instance.activeBuildingType.buildingInfos[0].resourceCostArray);
             bool canSpawnBuilding = BuildingManagerInstance.Instance.CanSpawnBuilding(BuildingManagerInstance.Instance.activeBuildingType, UtilsClass.GetMousePosition(), out string errMessage);
             if ( canAfford && canSpawnBuilding)
             {

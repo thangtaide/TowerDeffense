@@ -40,6 +40,8 @@ public class EnemyController : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
         Instantiate(Resources.Load<Transform>("pfEnemyDieParticles"),transform.position, Quaternion.identity);
+        CamerachineShake.Instance.SharkCamera(7f, .15f);
+        ChromaticAberrationEffect.Instance.SetWeight(.5f);
         Destroy(gameObject);
     }
 

@@ -32,6 +32,7 @@ public class HealthBar : MonoBehaviour
 
     private void HealthSystem_OnHealthAmountMaxChanged(object sender, System.EventArgs e)
     {
+        UpdateBar();
         ConstructHealthBarSeparator();
     }
 

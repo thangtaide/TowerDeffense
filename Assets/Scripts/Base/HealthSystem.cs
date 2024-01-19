@@ -9,13 +9,14 @@ public class HealthSystem : MonoBehaviour
     public event EventHandler OnTakeDamage;
     public event EventHandler OnHeal;
     public event EventHandler OnDied;
-    [SerializeField] int healthAmountMax;
+    private int healthAmountMax;
     private int healthAmount;
     private int healAmount;
     float healTimer, timer;
     int healPerSecond;
     private void Awake()
     {
+        healthAmountMax = 100;
         healthAmount = healthAmountMax;
         healAmount = 0;
         healTimer = 0f;
@@ -105,12 +106,18 @@ public class HealthSystem : MonoBehaviour
     }
     public void SetHealthAmountMax(int healthAmountMax, bool updateHealthAmount)
     {
-        this.healthAmountMax = healthAmountMax;
         if(updateHealthAmount)
         {
             healthAmount = healthAmountMax;
         }
+        else
+        {
+            Debug.Log(healthAmount);
+            healthAmount *= healthAmountMax / this.healthAmountMax;
+            Debug.Log(healthAmount+" "+ healthAmountMax / this.healthAmountMax);
+        }
 
+        this.healthAmountMax = healthAmountMax;
         OnHealthAmountMaxChanged?.Invoke(this, EventArgs.Empty);
     }
 }
